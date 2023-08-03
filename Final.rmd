@@ -71,6 +71,37 @@ the ones who received a vaccine had less symptoms then those with the
 placebo while the all male group that didnt contract covid showed no
 difference between those who were vaccinated and un vaccinated.
 
+## Numerical Results
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=maleData)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The data shows that 69.57% of the non vaccinated male group experienced
+symptoms while only 30.43% of the vaccinated males experienced symptoms.
+It also tells us that from the male placebo group 2.55% of them contracted
+COVID whilst only 1.15% of the vaccinated group contracted COVID.
+
+## Inferential Result
+
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The p value for the chi squared test is .0000000000001098 which indicates quite a significant relationship between the variables therefore disproving the null hypothesis $H_A$ giving strong evidence for the presence of an association between the variables
+
+For the fisher exact test the pvalue is .00000000000004631 giving a strong
+basis for the observed association between the variables to unlikely have
+occurred by chance alone.
+
+It also gives us a Odds ratio showing theres a 2.242522% higher chance of
+the events odds happening in one group giving more evidence to the positive
+association of the variables and rejection of the null $H_A$
 
 ## Females
 
