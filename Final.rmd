@@ -1,12 +1,11 @@
----
 title: "Covid91 vaccine study Final2023"
-author: "Put your name here!"
-output: 
-  html_document:
-    number_sections: true
-    toc: true
-    toc_depth: 5
-date: "`r Sys.Date()`" 
+author: "Jared Lobitana"
+output:
+html_document:
+number_sections: true
+toc: true
+toc_depth: 5
+date: "`r Sys.Date()`"
 ---
 
 ```{r include=FALSE,echo=FALSE}
@@ -15,16 +14,62 @@ require(tigerstats)
 require(forcats)
 FinalDat <-read.csv(file="final.csv",header=TRUE)
 #recode to remove the annoying "X" from the dataframe
-FinalData <- FinalDat  %>% select(-one_of("X"))
+FinalData <- FinalDat %>% select(-one_of("X"))
 FinalData <- FinalData %>%
 mutate(across(where(is.character), as.factor))
 ```
 
 # Introduction
 
-A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
+A new preventative vaccine (covid921) is under test in clinical trials.
+Given the nature of this vaccine it is suspected that the drug may exhibit
+different effectiveness across the variety of subpopulations tracked.
+Consider population subgroups by gender( guys and gals), drug use, and
+sexual orientation. Write a complete report that separately considers this
+drug for each subgroup and your recommendations as to whether people in the
+subgroup should take the vaccine. Structure your report in four sections
+each devoted to one of the four subgroups, use null and alternative
+hypothesis statements and correct statistical verbage when referencing
+p-values in conclusions.
+
+data from this study is taken from FinalData
+
+
+$H_0$: the vaccines has no effect on people within a subgroup
+
+$H_A$: the vaccine has an effect on people within a subgroup
+
+
+## Methods
+
+The statistical analysis i will be using to sort the data will be cat~cat
+because we are putting the sub groups into category
+
+
+
+the methods we will use to display the data is bar chart, cross table, and
+chi squared test
+
+## sub categorize male data
+```{r}
+maleData = filter (FinalData,sex == "M")
+```
+
 
 ## Males
+
+
+## Graphical Results
+```{r}
+barchartGC(~infected+treatment,data=maleData)
+barchartGC(~infected+treatment,data=maleData, type="percent")
+
+```
+
+This graph shows use that from the all male group of people who contracted
+the ones who received a vaccine had less symptoms then those with the
+placebo while the all male group that didnt contract covid showed no
+difference between those who were vaccinated and un vaccinated.
 
 
 ## Females
