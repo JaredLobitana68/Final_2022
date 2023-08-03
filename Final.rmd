@@ -139,10 +139,53 @@ The data suggests a significant relationship between the treatment type (placebo
 
 Fisher's exact test for count data on table2 reveals a odds ratio of (1.493076) with a 95% confidence interval of 1.199509 to 1.862988 suggesting a statistically significant positive association between the two categorical variables, indicating that the event's odds are about 1.49 times higher in one group compared to the other.
 
+The p-value from fishers exact test (0.0002162) indicates strong evidence against the null hypothesis, suggesting a statistically significant association between the two categorical variables again disproving the null $H_A$ 
+
+## subsetting lgtbq data
+
+```{r}
+LGBTQData = filter (FinalData,LGBTQ == "gay")
+```
 ## LGBTQ
+## Graphical Results
 
+```{r}
+barchartGC(~infected+treatment, data=LGBTQData)
+barchartGC(~infected+treatment, data=LGBTQData, type="percent")
 
+```
 
+This Graph shows that within the LGBTQ subgroup Those afflicted with covid 19 and that were vaccinated experienced more symptoms then their un vaccinated counter part. for the people who never contracted COVID, vaxxed or unvaxxed, there was no difference shown
+
+## Numerical Results
+
+```{r}
+table3 <- xtabs(~infected + treatment, data=LGBTQData)
+rowPerc(table3)
+colPerc(table3)
+```
+
+This table shows that within the all gay placebo group 15.38% experienced symptoms while 84.62% of the vaccinated group had symptoms
+
+From the all gay placebo group only .66% of the unvaccinated got infected with COVID-19 while a large 3.54% of vaccinated gay people got infected with COVID-19.
+
+## Inferential Result
+```{r}
+chisq.test(table3)
+chisqtestGC(table3)
+fisher.test(table3)
+```
+
+The p value within the LGBTQ group is 0.0000006668 showing that theres a significant association between the variables so i am rejecting the null hyothesis $H_A$ and conclude the covid vaccine has an effect within the LGBTQ population
+
+The Fishers exact tesst p value is 1.029e-08, which shows evidence for the extremely low probability of obtaining the observed results by chance alone, suggesting a highly significant association between the variables therefore disproving the null hypothesis $H_A$
+
+The odds ratio of the fisher exact test is 0.181787 indicating that the event's odds are approximately 0.18 times lower in one variable group compared to the other, implying a significant difference between the two groups. Again adding to the body of evidence against the null hyopthesis $H_A$
+
+## subset druggie data
+```{r}
+DrugUserData = filter(FinalData, DrugUser == "yes")
+```
 ## Druggies
 
 
