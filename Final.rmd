@@ -93,18 +93,51 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```
 
-The p value for the chi squared test is .0000000000001098 which indicates quite a significant relationship between the variables therefore disproving the null hypothesis $H_A$ giving strong evidence for the presence of an association between the variables
+The p value for the chi squared test is .0000000000001098 which indicates quite a significant relationship between the variables therefore disproving the null hypothesis $H_A$ giving strong evidence for the presence of an association between the variables. For the fisher exact test the pvalue is .00000000000004631 giving a strong basis for the observed association between the variables to unlikely have occurred by chance alone. It also gives us a Odds ratio showing theres a 2.242522% higher chance of the events odds happening in one group giving more evidence to the positive association of the variables and rejection of the null $H_A$
 
-For the fisher exact test the pvalue is .00000000000004631 giving a strong
-basis for the observed association between the variables to unlikely have
-occurred by chance alone.
 
-It also gives us a Odds ratio showing theres a 2.242522% higher chance of
-the events odds happening in one group giving more evidence to the positive
-association of the variables and rejection of the null $H_A$
+
+## sub categorizing female data
+
+```{r}
+femaleData = filter (FinalData,sex == "F")
+```
 
 ## Females
 
+## Graphical Results
+
+```{r}
+barchartGC(~infected + treatment, data=femaleData)
+barchartGC(~infected+treatment, data=femaleData, type="percent")
+
+```
+
+This graph shows use that from the all female group of people who had contracted COVID-19 the ones who received a vaccine had less symptoms overall then those with the placebo. while the all female group that didn't contract COVID showed almost no difference between those who were vaccinated and un vaccinated.
+
+## Numerical Results
+
+```{r}
+table2 <- xtabs(~infected + treatment, data=femaleData)
+rowPerc(table2)
+colPerc(table2)
+```
+
+The data from this table shows that from the female group that were infected with covid-19 of those who were unvaxed 60% of them experienced symptoms while only 40% of people in the vaccinated group experienced symptoms.
+
+Furthermore, this data also depicts that within the female placebo group 2.04% were infected with covid but only 1.37% of the vaccinated group.
+
+## Inferential Result
+
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+fisher.test(table2)
+```
+
+The data suggests a significant relationship between the treatment type (placebo vs. vaccine) and infection status based on Pearson's Chi-squared test (p-value = 0.0003). Therefore, we reject the null hypothesis $H_A$ , indicating that there is an association between the variables.
+
+Fisher's exact test for count data on table2 reveals a odds ratio of (1.493076) with a 95% confidence interval of 1.199509 to 1.862988 suggesting a statistically significant positive association between the two categorical variables, indicating that the event's odds are about 1.49 times higher in one group compared to the other.
 
 ## LGBTQ
 
